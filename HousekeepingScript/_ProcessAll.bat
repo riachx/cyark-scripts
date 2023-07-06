@@ -4,7 +4,16 @@
 @echo off
 
 echo  *******************************************************
-echo  *   Welcome to Reality Capture - Housekeeping Script  *
+echo  *                    Welcome to                       * 
+echo. *                                                     *                                                      
+echo  *     #######  ##  ###   ######  ######   ##  ##      *
+echo  *     ##  ###  ##  ###   ##  ##  ##  ##   ##  ##      *
+echo  *     ##  ###  ##  ###   ##  ##  ##  ##   ## ##       *
+echo  *     ##       #######  #######  #######  #######     *
+echo  *     ##   ##    ###    ###  ##  ### ###  ##  ###     *
+echo  *     ##   ##    ###    ###  ##  ### ###  ##  ###     *
+echo  *     #######    ###    ###  ##  ### ###  ##  ###     *
+echo. *                                                     *
 echo  *******************************************************
 echo. *                                                     *
 echo  * This script will save alignment settings, pull a    *
@@ -20,8 +29,6 @@ echo  *                                                     *
 echo  * Please make sure that Reality Capture is installed  *
 echo  * and properly configured before running this script. *
 echo  *                                                     *
-echo  *******************************************************
-echo  *        Script developed and owned by CyArk.         *
 echo  *******************************************************
 echo:
 
@@ -45,12 +52,18 @@ set componentOrder=1
 for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
     echo Processing folder %%i
-    %RealityCaptureExe% -set "appQuitOnError=true" -addFolder "%%i" -align^
-    -selectMaximalComponent -renameSelectedComponent "Component_!componentOrder!"^
-    -exportSelectedComponent "%ComponentFolder%" -clearCache -quit
+    %RealityCaptureExe% -set  "appQuitOnError=true" 
+    -addFolder "%%i"^
+    -align^
+    -selectMaximalComponent^
+    -renameSelectedComponent "Component_!componentOrder!"^
+    -exportSelectedComponent "%ComponentFolder%"^ 
+    -clearCache^
+    -quit^
     set /a componentOrder+=1
 )
 
 pause
 
 ::if /i "%EMAIL%" == "Y" ()
+:: maybe a loop method of doing realitycapturexe then -load scene and save this scene per loop. save scene above loop too.
