@@ -15,19 +15,20 @@ echo  *     ##   ##    ###    ###  ##  ### ###  ##  ###     *
 echo  *     #######    ###    ###  ##  ### ###  ##  ###     *
 echo. *                                                     *
 echo  *******************************************************
-echo. *                                                     *
-echo  * This script will save alignment settings, pull a    *
-echo  * license, import images, align components, and       *
-echo. * export components.                                  *
+echo  *                 Housekeeping Script                 *
 echo  *                                                     *
-echo. * You will be asked what drive to use and what your   *
-echo. * project is named in order to maintain proper        *
-echo. * organization.                                       *
+echo. *  Please read the README.txt file before proceeding! *
+echo  *  This script will save alignment settings, pull a   *
+echo  *  license,                                           *
 echo  *                                                     *
-echo  * For help and troubleshooting, refer to the README.  *
+echo. *  You will be asked what drive to use and what your  *
+echo. *  project is named in order to maintain proper       *
+echo. *  organization.                                      *
 echo  *                                                     *
-echo  * Please make sure that Reality Capture is installed  *
-echo  * and properly configured before running this script. *
+echo  *  For help and troubleshooting, refer to the README. *
+echo  *                                                     *
+echo  *  Ensure that Reality Capture is installed and       *
+echo  *  properly configured before running this script.    *
 echo  *                                                     *
 echo  *******************************************************
 echo:
@@ -42,26 +43,16 @@ if /i "%EMAILBOOL%" == "Y" (
     echo Email is "%EMAILNAME%"
 )
 
-:: allows for componentOrder to increment
-setlocal ENABLEDELAYEDEXPANSION
+:: use the instance name if you do not want to save project and instead you want to run the open RC.exe
+:: this might be useful in cases where you only want to open RC once, and also not save the project at all.
+:: -setInstanceName "RC_Clean_Template"^
 
-:: stores the naming convention of Component, increases per loop
-set componentOrder=1
-
-:: loops through each subfolder in Directory and aligns and exports each component.
-for /d %%i in ("%Images%\*") do (
-    :: Writes out in the Command Prompt which subfolder is currently being processed.
-    echo Processing folder %%i
-    %RealityCaptureExe% -set  "appQuitOnError=true" 
-    -addFolder "%%i"^
-    -align^
-    -selectMaximalComponent^
-    -renameSelectedComponent "Component_!componentOrder!"^
-    -exportSelectedComponent "%ComponentFolder%"^ 
-    -clearCache^
-    -quit^
-    set /a componentOrder+=1
-)
+%RealityCaptureExe% -newScene^ 
+    -set "appQuitOnError=true"^
+    -importGlobalSettings "Global_Settings.rcconfig"^
+    -save %Project%^
+    -clearCache 
+    -quit
 
 pause
 
