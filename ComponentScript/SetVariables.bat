@@ -29,6 +29,9 @@ echo The path to your exported components will be %ComponentFolder%
 :: sets the path of the imported alignment settings
 set AlignmentSettings="%RootFolder%\RC_Alignment_Low_Overlap.xml"
 
+:: sets path of where housekeeping script saved file
+set Project=%RootFolder%\Scene\%SCENENAME%
+
 :: sets the path of where we want to save the components
 set ComponentPath="%RootFolder%\Components"
 echo:

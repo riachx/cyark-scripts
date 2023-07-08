@@ -36,13 +36,6 @@ echo:
 :: sets necessary paths
 call SetVariables.bat
 
-:: asks if user requests a notification when the script terminates
-set /p EMAILBOOL="Do you want to receive an email when the script finishes? (Y/N) : "
-if /i "%EMAILBOOL%" == "Y" (
-    set /p "EMAILNAME =Enter your email address: "
-    echo Email is "%EMAILNAME%"
-)
-
 :: allows for componentOrder to increment
 setlocal ENABLEDELAYEDEXPANSION
 
@@ -53,13 +46,13 @@ set componentOrder=1
 for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
     echo Processing folder %%i
-    %RealityCaptureExe% -delegateTo-set  "appQuitOnError=true" 
+    %RealityCaptureExe% -set  "appQuitOnError=true" 
+    -load %Project%
     -addFolder "%%i"^
     -align^
     -selectMaximalComponent^
     -renameSelectedComponent "Component_!componentOrder!"^
     -exportSelectedComponent "%ComponentFolder%"^ 
-    -clearCache^
     -quit^
     set /a componentOrder+=1
 )
