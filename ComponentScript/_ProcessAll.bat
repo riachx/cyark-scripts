@@ -47,6 +47,7 @@ for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
     echo Processing folder %%i
     %RealityCaptureExe% -set  "appQuitOnError=true" 
+    :: this loads the project that was saved from the Housekeeping script
     -load %Project%
     -addFolder "%%i"^
     -align^
