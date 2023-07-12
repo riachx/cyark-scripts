@@ -1,4 +1,4 @@
-:CapturingReality
+::CapturingReality
 
 :: switch off console output
 @echo off
@@ -36,6 +36,8 @@ echo:
 :: sets necessary paths
 call SetVariables.bat
 
+set /p "PROJECTNAMRE=Welcome "
+
 :: allows for componentOrder to increment
 setlocal ENABLEDELAYEDEXPANSION
 
@@ -47,8 +49,7 @@ for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
     echo Processing folder %%i
     %RealityCaptureExe% -set  "appQuitOnError=true" 
-    :: this loads the project that was saved from the Housekeeping script
-    -load %Project%
+    -newScene
     -addFolder "%%i"^
     -align^
     -selectMaximalComponent^
@@ -59,6 +60,3 @@ for /d %%i in ("%Images%\*") do (
 )
 
 pause
-
-::if /i "%EMAIL%" == "Y" ()
-:: maybe a loop method of doing realitycapturexe then -load scene and save this scene per loop. save scene above loop too.
