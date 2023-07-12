@@ -36,12 +36,6 @@ echo:
 :: sets necessary paths
 call SetVariables.bat
 
-:: asks if user requests a notification when the script terminates
-set /p EMAILBOOL="Do you want to receive an email when the script finishes? (Y/N) : "
-if /i "%EMAILBOOL%" == "Y" (
-    set /p "EMAILNAME =Enter your email address: "
-    echo Email is "%EMAILNAME%"
-)
-
-%RealityCaptureExe% -newScene -save %Project% -clearCache -quit
+:: run Reality Capture
+%RealityCaptureExe% -newScene -importGlobalSettings "RC_Global_Settings.rcconfig" -quit
         
