@@ -37,5 +37,8 @@ echo:
 call SetVariables.bat
 
 :: run Reality Capture
-%RealityCaptureExe% -newScene -importGlobalSettings "RC_Global_Settings.rcconfig" -quit
-        
+%RealityCaptureExe% -newScene -importGlobalSettings %Settings% -quit
+
+echo Your script has finished.
+
+pause        
