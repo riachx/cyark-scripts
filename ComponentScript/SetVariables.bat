@@ -11,17 +11,16 @@ echo Ensure the following paths are correct:
 echo:
 
 :: path to RealityCapture application
-REM change to C once finished
-set RealityCaptureExe=D:\RealityCapture\RealityCapture.exe
+set RealityCaptureExe=C:\RealityCapture\RealityCapture.exe
 echo The path to your application is %RealityCaptureExe%
 
-:: root path to work folders where all the datasets are stored (%~dp0 means the flder in which this script is stored)
+:: root path to work folders where all the datasets are stored 
 set RootFolder=%DRIVELETTER%:\%PROJECTNAME%
 echo The path to your root folder is %RootFolder%
 
-:: allows for users to have dates preceding "Applications" folder
+:: allows for users to have dates preceding/succeding "Applications" folder
 set "keyword=Applications"
-set "Applications=Applications"
+set "Applications=02_Applications"
 
 for /d %%F in ("%RootFolder%\*") do (
     echo %%~nxF | findstr /i %keyword% >nul
@@ -32,9 +31,9 @@ for /d %%F in ("%RootFolder%\*") do (
 )
 :endOfLoop
 
-:: allows for users to have dates preceding "Master" folder
+:: allows for users to have dates preceding/succeding "Master" folder
 set "keyword=Master"
-set "Master=Master"
+set "Master=03_Master"
 
 for /d %%F in ("%RootFolder%\*") do (
     echo %%~nxF | findstr /i %keyword% >nul
@@ -49,7 +48,19 @@ for /d %%F in ("%RootFolder%\*") do (
 set Images=%RootFolder%\%Master%\Photogrammetry
 echo The path to your images is %Images%
 
-set ComponentFolder=%RootFolder%\%Applications%\RealityCapture\Components
+:: set path to the folder that stores the components
+set ComponentFolder=%RootFolder%\%Applications%\Reality_Capture\Components
 echo The path to your exported components will be %ComponentFolder%
+echo:
 
+:: allows user to change application path if incorrect
+set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
+if /i "%PROGRAMPATHTRUE%" == "N" (
+    set /p "RealityCaptureExe=Paste your application path: "
+    echo:
+    echo The path to your application is now !RealityCaptureExe!
+)
+
+echo:
+echo Starting script...
 echo:
