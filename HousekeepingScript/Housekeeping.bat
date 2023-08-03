@@ -37,8 +37,22 @@ echo:
 call SetVariables.bat
 
 :: run Reality Capture
-%RealityCaptureExe% -set "appQuitOnError=true" -set "suppressErrors=true" -newScene -importGlobalSettings %Settings% -quit
+%RealityCaptureExe% -set "appQuitOnError=true" -set "suppressErrors=true" -newScene -importGlobalSettings %Settings% -set "appCacheLocation=Custom" -set "appCacheCustomLocation=D:\Cache2" -quit
 
 echo Your script has finished.
-
+echo: 
+echo                /@\                      
+echo               /@@@\                     
+echo              /@@@@@\                    
+echo             /@@@@@@@\                   
+echo            /@@@@@@@@/                    
+echo           /@@@@@@@@/                     
+echo          /@@@@@@@@/    _____                 
+echo         /@@@@@@@@/   /@@@@@@@\             
+echo        /@@@@@@@@/   /@@@@@@@@@\            
+echo       /@@@@@@@@/________________                          
+echo      /@@@@@@@@@@@@@@@@@@@@@@@@@@@\        
+echo     /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\       
+echo    /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\  
+echo:
 pause
