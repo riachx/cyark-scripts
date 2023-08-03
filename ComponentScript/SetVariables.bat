@@ -11,7 +11,7 @@ echo Ensure the following paths are correct:
 echo:
 
 :: path to RealityCapture application
-set RealityCaptureExe=C:\RealityCapture\RealityCapture.exe
+set RealityCaptureExe=D:\RealityCapture\RealityCapture.exe
 echo The path to your application is %RealityCaptureExe%
 
 :: root path to work folders where all the datasets are stored 
@@ -55,11 +55,9 @@ echo:
 
 :: allows user to change application path if incorrect
 set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
-if /i "%PROGRAMPATHTRUE%" == "N" (
-    set /p "RealityCaptureExe=Paste your application path: "
-    echo:
-    echo The path to your application is now !RealityCaptureExe!
-)
+    if /i "%PROGRAMPATHTRUE%" == "N" (
+        set /p "RealityCaptureExe=Paste your application path: "
+    )
 
 echo:
 echo Starting script...

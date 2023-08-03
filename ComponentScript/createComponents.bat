@@ -43,9 +43,23 @@ setlocal ENABLEDELAYEDEXPANSION
 for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
     echo Processing folder %%i
-    %RealityCaptureExe% -set "appQuitOnError=true" -addFolder "%%i" -align -selectMaximalComponent -renameSelectedComponent "%Images%" -exportSelectedComponent "%ComponentFolder%" -clearCache -quit
+    %RealityCaptureExe% -set "appQuitOnError=true" -addFolder "%%i" -align -selectMaximalComponent -renameSelectedComponent "%%i" -exportSelectedComponent "%ComponentFolder%" -clearCache -quit
 )
 
 echo Your script has finished.
-
+echo: 
+echo                /@\                      
+echo               /@@@\                     
+echo              /@@@@@\                    
+echo             /@@@@@@@\                   
+echo            /@@@@@@@@/                    
+echo           /@@@@@@@@/                     
+echo          /@@@@@@@@/    _____                 
+echo         /@@@@@@@@/   /@@@@@@@\             
+echo        /@@@@@@@@/   /@@@@@@@@@\            
+echo       /@@@@@@@@/________________                          
+echo      /@@@@@@@@@@@@@@@@@@@@@@@@@@@\        
+echo     /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\       
+echo    /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\  
+echo:
 pause
