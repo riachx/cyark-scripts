@@ -11,9 +11,9 @@ echo Ensure the following paths are correct:
 echo:
 
 :: path to RealityCapture application
-set RealityCaptureExe=D:\RealityCapture\RealityCapture.exe
+::set RealityCaptureExe=D:\RealityCapture\RealityCapture.exe
+set RealityCaptureExe="C:\Program Files\Capturing Reality\RealityCapture\RealityCapture.exe"
 echo The path to your application is %RealityCaptureExe%
-
 
 set "drive=%DRIVELETTER%:"
 set "project_found=false"
@@ -82,11 +82,10 @@ echo:
     echo(%ComponentFolder%
 )
 
-
 :: allows user to change application path if incorrect
 set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
     if /i "%PROGRAMPATHTRUE%" == "N" (
-        set /p "RealityCaptureExe=Paste your application path: "
+        set /p "RealityCaptureExe=Paste your application path in double quotes: "
     )
 
 echo:
