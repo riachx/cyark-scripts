@@ -19,11 +19,11 @@ echo  *                 Housekeeping Script                 *
 echo  *                                                     *
 echo. *  Please read the README.txt file before proceeding! *
 echo  *  This script will load global settings into your    *
-echo  *  Reality Capture program.                           *
+echo  *  Reality Capture program and specify a Cache        *
+echo  *  location.                                          *
 echo  *                                                     *
-echo. *  You will be asked what drive to use and what your  *
-echo. *  project is named in order to maintain proper       *
-echo. *  organization.                                      *
+echo. *  You will be asked a few questions in order to      * 
+echo. *  maintain proper organization.                      *
 echo  *                                                     *
 echo  *  For help and troubleshooting, refer to the README. *
 echo  *                                                     *
@@ -37,7 +37,7 @@ echo:
 call SetVariables.bat
 
 :: run Reality Capture
-%RealityCaptureExe% -set "appQuitOnError=true" -set "appQuitOnReset=true" -set "suppressErrors=true" -importGlobalSettings %Settings% -set "appQuitOnReset=true" -quit
+%RealityCaptureExe% -set "appQuitOnError=true" -set "appQuitOnReset=true" -set "suppressErrors=true" -importGlobalSettings %Settings% -quit
 %RealityCaptureExe% -set "appQuitOnReset=true" -set "appCacheLocation=Custom" -quit
 %RealityCaptureExe% -set "appQuitOnReset=true" -set "appCacheCustomLocation=%USERCACHEPATH%" -quit
 
