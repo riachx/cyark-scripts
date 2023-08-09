@@ -8,11 +8,11 @@ echo Ensure the following paths are correct:
 echo:
 
 :: path to RealityCapture application
-set RealityCaptureExe="C:\Program Files\Capturing Reality\RealityCapture\RealityCapture\RealityCapture.exe"
+set RealityCaptureExe="D:\RealityCapture\RealityCapture.exe"
 echo The path to your application is %RealityCaptureExe%
 
 :: sets the path of the imported settings (should be where script is saved)
-set Settings="%CD%\RC_Global_Settings.rcconfig"
+set Settings="%CD%\nocache.rcconfig"
 echo The path to your global settings is %Settings%
 echo:
 
@@ -22,8 +22,9 @@ set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
         set /p "RealityCaptureExe=Paste your application path: "
     )
 
+set USERCACHEPATH="D:\Cache"
 :: allows user to change application path if incorrect
-set /p "USERCACHE=Do you want to set a cache location? Default is D:\Cache. (Y/N): "
+set /p "USERCACHE=Do you want to set a cache location? If not, default is D:\Cache and you must create the folder prior to running this script. (Y/N): "
     if /i "%USERCACHE%" == "Y" (
         set /p "USERCACHEPATH=Paste the path of your cache folder: "
     )
@@ -36,5 +37,6 @@ set /p "START=Would you like to start? (Y/N): "
     )
 
 echo:
-echo Starting script...
+echo The program will open a few times.
+echo Starting script . . .
 echo:
