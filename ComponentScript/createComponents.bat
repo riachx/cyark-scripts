@@ -36,15 +36,20 @@ echo:
 :: sets necessary paths
 call SetVariables.bat
 
-:: allows for componentOrder to increment
-setlocal ENABLEDELAYEDEXPANSION
+:: write the temp file to a variable 
+:: this is necessary since the scope of variables in setlocal stays within the block in SetVariables.bat
+set /p "Images=" < tmp_paths.txt
+for /f "skip=1" %%G IN (tmp_paths.txt) DO if not defined line set "ComponentFolder=%%G"
 
 :: loops through each subfolder in Directory and aligns and exports each component.
 for /d %%i in ("%Images%\*") do (
     :: Writes out in the Command Prompt which subfolder is currently being processed.
-    echo Processing folder %%i
-    %RealityCaptureExe% -set "appQuitOnError=true" -addFolder "%%i" -align -selectMaximalComponent -renameSelectedComponent "%%i" -exportSelectedComponent "%ComponentFolder%" -clearCache -quit
+    echo Processing folder %%~nxi . . .
+    %RealityCaptureExe% -set "appQuitOnError=true" -addFolder "%%i" -align -selectMaximalComponent -renameSelectedComponent "%%~nxi" -exportSelectedComponent "%ComponentFolder%" -clearCache -quit
 )
+
+:: delete the temporary file
+del tmp_paths.txt
 
 echo Your script has finished.
 echo: 

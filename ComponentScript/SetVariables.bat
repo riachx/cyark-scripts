@@ -4,7 +4,7 @@
 @echo off
 
 set /p "DRIVELETTER=Enter the drive of where your project folder is located (e.g., C,D,X): "
-set /p "PROJECTNAME=Enter the project name (e.g., AMX_American_Embassy, QMP_Queen_Museum_Panorama_05_2022): "
+set /p "PROJECTNAME=Enter the three letters preceding your project name (e.g., AMX_American_Embassy will be AMX): "
 
 echo:
 echo Ensure the following paths are correct:
@@ -14,8 +14,33 @@ echo:
 set RealityCaptureExe=D:\RealityCapture\RealityCapture.exe
 echo The path to your application is %RealityCaptureExe%
 
+
+set "drive=%DRIVELETTER%:"
+set "project_found=false"
+setlocal enabledelayedexpansion
+for /d %%i in ("%drive%\*") do (
+    set "folder_name=%%~nxi"
+    if "!folder_name:~0,3!" equ "%PROJECTNAME%" (
+        set "PROJECTNAME=%%i"
+        set "project_found=true"
+    )
+)
+
+if "!project_found!" == "false" (
+    echo:
+    echo **********************************************************************************************
+    echo:
+    echo  ERROR: Project not found!                                                                  
+    echo  Ensure you are typing the first three letters of the project name. Capitalization matters.
+    echo:
+    echo **********************************************************************************************
+    echo:
+    echo Quitting . . .
+    pause
+) 
+
 :: root path to work folders where all the datasets are stored 
-set RootFolder=%DRIVELETTER%:\%PROJECTNAME%
+set RootFolder=!PROJECTNAME!
 echo The path to your root folder is %RootFolder%
 
 :: allows for users to have dates preceding/succeding "Applications" folder
@@ -52,12 +77,26 @@ echo The path to your images is %Images%
 set ComponentFolder=%RootFolder%\%Applications%\Reality_Capture\Components
 echo The path to your exported components will be %ComponentFolder%
 echo:
+> tmp_paths.txt (
+    echo(%Images%
+    echo(%ComponentFolder%
+)
+
 
 :: allows user to change application path if incorrect
 set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
     if /i "%PROGRAMPATHTRUE%" == "N" (
         set /p "RealityCaptureExe=Paste your application path: "
     )
+
+echo:
+set /p "START=Would you like to start? (Y/N): "
+    if /i "%START%" == "N" (
+        echo Quitting program...
+        exit \b 0
+    )
+
+endlocal
 
 echo:
 echo Starting script...
