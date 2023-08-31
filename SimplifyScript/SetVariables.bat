@@ -1,39 +1,39 @@
 ::Simplify Script
-:: switch off console output
 @echo off
 
+echo **Ensure your RC project is open.**
 echo:
 echo Ensure the following paths are correct:
 echo:
 
 :: path to RealityCapture application
-set RealityCaptureExe=C:\Program Files\Capturing Reality\RealityCapture\RealityCapture.exe
+set RealityCaptureExe="C:\Program Files\Capturing Reality\RealityCapture\RealityCapture.exe"
 echo The path to your application is %RealityCaptureExe%
 echo:
 
-:: allows user to change application path if incorrect
-set /p "PROGRAMPATHTRUE=Is your application path correct? (Y/N): "
-    if /i "%PROGRAMPATHTRUE%" == "N" (
-        set /p "RealityCaptureExe=Paste your application path: "
+:: allows user to change application path, if incorrect
+set /p "ProgramPathTrue=Is your application path correct? (Y/N): "
+    if /i "%ProgramPathTrue%" == "N" (
+        set /p "RealityCaptureExe=Paste your application path in double quotes (e.g. "D:\Path") : "
         echo:
     )
 echo:
 
-::set /p SIZE=Is your model in the billions, millions or thousands? (B,M, or T):
-::if /i "%SIZE%" == "B" (
-
 :: Ask the user for the triangle count
-set /p TRICOUNT=Enter the approximate triangle count of the model (No commas): 
+set /p TriCount=Enter the approximate triangle count of the model (No commas): 
 echo:
 echo Your model will be simplified down to approximately 30M triangles.
 
-REM Step 2: Call the PowerShell script and pass the number
-powershell -ExecutionPolicy Bypass -File "divide.ps1" %TRICOUNT%
+:: If you want to simplify to a different number, change this.
+:: stores the optimal triangle count. 
+set "FinalSimplify=30000000"
 
+:: Call the PowerShell script and pass the triangle count and optimal triangle count
+powershell -ExecutionPolicy Bypass -File "divide.ps1" %TriCount% %FinalSimplify%
+:: push the number of times to divide to a temporary text file
 < output.txt (
     set /p "timesToDivide="
 )
 
-
-set Settings="%CD%\SimplifySettings.xml"
-pause
+:: stores the simplification settings that simplify by 1/2 each time
+set DivideByHalfSettings="%CD%\SimplifySettings.xml"
