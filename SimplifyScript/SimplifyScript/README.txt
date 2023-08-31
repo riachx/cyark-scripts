@@ -18,7 +18,9 @@ BEFORE RUNNING:
 
     3. Your project must have a component named "Master" with the model you want simplified named "Ultra".
 
-    4. If you quit this program early, note that the file output.txt is a temporary file and can be deleted.
+    4. Your component "Master" should not have any models named "Model 1", "Model 2", "Model 3", etc. 
+
+    5. If you quit this program early, note that the file output.txt is a temporary file and can be deleted.
 
 TO BEGIN:
 
@@ -52,3 +54,5 @@ TO BEGIN:
 5. Ensure you inputted a triangle count over 30 million. If you want to simplify to a different amount, simply change the variable "FinalSimplify".
 
 6. You must have PowerShell installed. All modern Windows computers have this.
+
+7. Ensure the component "Master" does not have any models named "Model 1", "Model 2", "Model 3", etc. 

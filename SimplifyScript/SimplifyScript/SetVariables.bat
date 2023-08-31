@@ -14,7 +14,7 @@ echo:
 :: allows user to change application path, if incorrect
 set /p "ProgramPathTrue=Is your application path correct? (Y/N): "
     if /i "%ProgramPathTrue%" == "N" (
-        set /p "RealityCaptureExe=Paste your application path in double quotes: "
+        set /p "RealityCaptureExe=Paste your application path in double quotes (e.g. "D:\Path") : "
         echo:
     )
 echo:
